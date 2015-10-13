@@ -3,8 +3,6 @@ package servlets;
 import beans.beanLivre;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,24 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import sql.ReqLivre;
+import sql.ReqLivreHash;
 
 
 @WebServlet(name = "controller", urlPatterns = {"/controller"})
-public class controller extends HttpServlet {
+public class controllerHash extends HttpServlet {
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String url ="/WEB-INF/jspCatalog.jsp";
+        String url ="/WEB-INF/jspCatalogHash.jsp";
         
 //        mes variable de scope application et session
         
         ServletContext application = this.getServletContext();
         HttpSession session = request.getSession();
-        
-        
         
 //        creation bean livre ds le scope application
         beanLivre livre = (beanLivre) application.getAttribute("livre");
@@ -42,12 +39,12 @@ public class controller extends HttpServlet {
         }
         
 //        instance ma methode sql listant tout mes livre
-        ReqLivre reqListeLivre = new ReqLivre();
+        ReqLivreHash reqListeLivreHash = new ReqLivreHash();
         
 //        envoie de ma liste ds ma jsp via la metode request. nom de ma variable 'listeLivre'
         request.setAttribute("listeLivre", null);
         try {
-            request.setAttribute("listeLivre", reqListeLivre.getListeLivre());
+            request.setAttribute("listeLivre", reqListeLivreHash.getListeLivre());
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
@@ -56,7 +53,7 @@ public class controller extends HttpServlet {
         //page du detail du livre
         if(request.getParameter("detailLivre") != null) {
             url="/WEB-INF/detailLivre.jsp";
-        //instance ma methode sql prenant unlivre selon num isbn
+            //        instance ma methode sql listant tout mes livre
         ReqLivre reqLivreDetail = new ReqLivre();
         
         //envoie de mon livre ds ma jsp via la metode request. nom de ma variable 'detailLivre'
@@ -66,40 +63,6 @@ public class controller extends HttpServlet {
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
-        
-
-        }
-        
-//        ma liste qui aura tout les livre du panier
-//         scope session
-         List<beanLivre> listePanier =  null;
-//                 (List<beanLivre>) session.getAttribute("panier");
-//         if(listePanier == null) {
-             listePanier = new ArrayList();
-//             session.setAttribute("panier", listePanier);
-//         }
-         
-//        si un livre est envoyé au panier ---->
-        if(request.getParameter("sendToPanier") != null) {
-            url ="/WEB-INF/jspPanier.jsp";
-           ReqLivre reqLivrePanier = new ReqLivre();
-        
-//           si url panier (parametre num isbn) est present
-           if(request.getParameter("panier") != null) {
-//               tu me cree un livre
-               beanLivre livrePanier = new beanLivre();
-//               ce livre a comme valeur la ligne de ma bdd WHERE isbn = request.getParameter("panier")
-//               donc appel a ma methode qui prend tout les attributs WHERE isbn = ?
-                try {
-                    livrePanier = reqLivrePanier.getLivre(request.getParameter("panier"));
-                } catch (SQLException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-//                je prends ma liste Panier...
-                listePanier.add(livrePanier);
-//                ajoute le livre créé a celle ci et renvoie ma liste a ma jsp
-                request.setAttribute("listePanier", listePanier);
-           }
         }
         
         request.getRequestDispatcher(url).include(request, response);

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sql;
 
 import beans.beanLivre;
@@ -11,19 +7,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author cdi418
- */
-public class ReqLivre {
+
+public class ReqLivreHash {
     
-    public List<beanLivre> getListeLivre() throws ClassNotFoundException, SQLException {
+    public Map<String,beanLivre> getListeLivre() throws ClassNotFoundException, SQLException {
         
-        List<beanLivre> liste = new ArrayList();
+        Map <String,beanLivre> map =new HashMap();
         
         MaConnection mc = MaConnection.getInstance();
     
@@ -106,8 +103,8 @@ public class ReqLivre {
             livre.getTvaLivre().setNomTauxTva(rs.getString("nomTauxTva"));
             livre.getTvaLivre().setValeurTauxTva(rs.getFloat("valeurTauxTva"));
                     
-                    
-            liste.add(livre);
+            map.put(rs.getString("isbn13Livre"), livre);
+            
             
         }
         
@@ -115,7 +112,7 @@ public class ReqLivre {
         stm.close();
         
         
-        return liste;
+        return map;
         
     }
     
@@ -219,22 +216,17 @@ public class ReqLivre {
     }
     
     public static void main(String[] args) {
-        ReqLivre req = new ReqLivre();
+        ReqLivreHash req = new ReqLivreHash();
         try {
-            for(beanLivre l : req.getListeLivre()) {
-                System.out.println(l.getTitreLivre() + " " + l.getSousTitreLivre() + " " + 
-                        l.getEditeurLivre().getNomEditeur() + " " + l.getEditeurLivre().getIdEditeur() + " " +
-                        l.getAuteurLivre().getBiographieAuteur() + " " + l.getAuteurLivre().getDateDecesAuteur() + " " +
-                        l.getAuteurLivre().getDateNaissanceAuteur() + " " + l.getAuteurLivre().getNomAuteur() + " " +
-                        l.getAuteurLivre().getPrenomAuteur() + " " + l.getAuteurLivre().getIdAuteur() + " " + 
-                        l.getSousThemeLivre().getNomSousTheme() + l.getSousThemeLivre().getIdSousTheme() + " " +
-                        l.getTvaLivre().getNomTauxTva() + " " + l.getTvaLivre().getValeurTauxTva() + " " + 
-                        l.getTvaLivre().getIdTva()
-                );
-            }
-        } catch (ClassNotFoundException | SQLException ex) {
+            for(Entry<String, beanLivre> entry : req.getListeLivre().entrySet()) {
+                String cle = entry.getKey();
+                beanLivre valeur = entry.getValue();
+                System.out.println(cle + " " + valeur.getTitreLivre() + " ");
+                
+            }       } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
+        
     }
     
 }

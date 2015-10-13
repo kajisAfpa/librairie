@@ -33,7 +33,7 @@ public class MaConnection {
             String url = "jdbc:sqlserver://localhost:1433;"
                     + "databaseName=Librairie";
             String user = "sa";
-            String mdp = "sa";
+            String mdp = "ngavin";
             cnt = DriverManager.getConnection(url, user, mdp);
             
             
