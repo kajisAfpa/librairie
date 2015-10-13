@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class ReqLivre {
     
-    public List<beanLivre> getListeLivre() throws ClassNotFoundException, SQLException {
+    public List<beanLivre> getListeLivre(int depart, int nextItem) throws ClassNotFoundException, SQLException {
         
         List<beanLivre> liste = new ArrayList();
         
@@ -70,13 +70,17 @@ public class ReqLivre {
                 + "ON sst.idSousTheme = app.idSousTheme "
 				 //fin sous theme
                 + "WHERE actifLivre = 1 " //  AND l.isbn13Livre = '9782011691699'
-                + "ORDER BY titreLivre" ;
+                + "ORDER BY titreLivre asc offset ? rows fetch next ? rows only";
         
         System.out.println(req);
         
-        Statement stm = mc.createStatement();
+        PreparedStatement pstm = mc.prepareStatement(req);
         
-        ResultSet rs = stm.executeQuery(req);
+        pstm.setInt(1, depart);
+        pstm.setInt(2, nextItem);
+       
+        
+        ResultSet rs = pstm.executeQuery();
         
         while(rs.next()) {
             
@@ -112,11 +116,31 @@ public class ReqLivre {
         }
         
         rs.close();
-        stm.close();
+        pstm.close();
         
         
         return liste;
         
+    }
+    
+    
+    public int nbrTotalArticle() throws ClassNotFoundException, SQLException {
+        
+        int nbrTotal = 0;
+        
+        MaConnection mc = MaConnection.getInstance();
+        
+        String req = "select COUNT(*) AS nbrTotalArt from Livre ";
+                
+        Statement stm = mc.createStatement();
+        
+        ResultSet rs = stm.executeQuery(req);
+        
+        while(rs.next()) {
+            nbrTotal = Integer.parseInt(rs.getString("nbrTotalArt"));
+        }
+        
+        return nbrTotal;
     }
     
     
@@ -221,7 +245,7 @@ public class ReqLivre {
     public static void main(String[] args) {
         ReqLivre req = new ReqLivre();
         try {
-            for(beanLivre l : req.getListeLivre()) {
+            for(beanLivre l : req.getListeLivre(0, 10)) {
                 System.out.println(l.getTitreLivre() + " " + l.getSousTitreLivre() + " " + 
                         l.getEditeurLivre().getNomEditeur() + " " + l.getEditeurLivre().getIdEditeur() + " " +
                         l.getAuteurLivre().getBiographieAuteur() + " " + l.getAuteurLivre().getDateDecesAuteur() + " " +

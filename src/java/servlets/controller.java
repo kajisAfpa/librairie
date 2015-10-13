@@ -44,13 +44,49 @@ public class controller extends HttpServlet {
 //        instance ma methode sql listant tout mes livre
         ReqLivre reqListeLivre = new ReqLivre();
         
-//        envoie de ma liste ds ma jsp via la metode request. nom de ma variable 'listeLivre'
-        request.setAttribute("listeLivre", null);
+        
+//        les bornes des pages
+        
+        int nbr_article = 10;
+        int depart = 0;
+
+        
+        //nombre de page
+        int nbrPage = 0;
         try {
-            request.setAttribute("listeLivre", reqListeLivre.getListeLivre());
+            nbrPage = reqListeLivre.nbrTotalArticle() / nbr_article;
+//            envoie a ma jsp variable nbre page
+            request.setAttribute("nbrPage", nbrPage);
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
+        
+//      liste bidon pour simuler boucle for pour les onglet de page
+        List<String> bidon = new ArrayList();
+        for(int i = 1; i <= nbrPage + 1; i++) {
+            bidon.add(""+i);
+        }
+        
+        request.setAttribute("onglet", bidon);
+        
+
+//                si url page existe:
+        if(request.getParameter("page") != null) {
+//            article de depart est valeur get.page - 1 * nbr_article
+            depart = (Integer.parseInt(request.getParameter("page")) - 1) * nbr_article;
+        }
+        
+        
+        //        affichage sur ma jsp
+//        envoie de ma liste ds ma jsp via la metode request. nom de ma variable 'listeLivre'
+        request.setAttribute("listeLivre", null);
+        try {
+            request.setAttribute("listeLivre", reqListeLivre.getListeLivre(depart, nbr_article));
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
+
+       
         
         
         //page du detail du livre
