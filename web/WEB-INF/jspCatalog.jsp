@@ -78,7 +78,7 @@
 
                     <div class="row">
 
-                        <td class="col-md-2"> <img src="http://lorempixel.com/400/200/"></td>
+                        <td class="col-md-2"> <img src="http://lorempixel.com/200/150/"></td>
                         <td class="col-md-8 contenu">
 
                             <p class="title text-center">${livre.titreLivre} <small> - ${livre.sousTitreLivre}</small></p>
