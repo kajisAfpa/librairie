@@ -1,0 +1,35 @@
+tr {
+    box-sizing: content-box;
+    transition: 0.1s linear;
+
+}
+
+
+td {
+    //border: 1px solid black;
+    height: 100px;
+    max-height: 100px;
+}
+
+td img {
+    width: 100%;
+}
+
+.title {
+    border-bottom: #eee solid 1px;
+    background: #fff;
+}
+
+tr:hover {
+    //border-left: 5px solid #0D87E9;
+    box-shadow: 2px 3px 5px #ebebeb;
+
+}
+
+.contenu p {
+    height: 30px;
+}
+
+.sommaire {
+    position: fixed;
+}

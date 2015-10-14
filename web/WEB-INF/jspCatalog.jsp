@@ -12,107 +12,111 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
 
-        <style>
-
-            tr {
-                box-sizing: content-box;
-                transition: 0.1s linear;
-                
-            }
-
-
-            td {
-                //border: 1px solid black;
-                height: 100px;
-                max-height: 100px;
-            }
-
-            td img {
-                width: 100%;
-            }
-
-            .title {
-                border-bottom: #eee solid 1px;
-                background: #fff;
-            }
-
-            tr:hover {
-                //border-left: 5px solid #0D87E9;
-                box-shadow: 2px 3px 5px #ebebeb;
-
-            }
-            
-            .contenu p {
-                height: 30px;
-            }
-
-
-
-
-
-        </style>
 
     </head>
+
+
     <body>
 
+
+
         <div class="container">
+
 
 
             <h1 class="page-header text-center">mon catalogue</h1>
 
 
-            <table class="table table-striped">
+            <div class="row">
+
+                
+                <%-- sommaire cote --%>
+                <div class="col-md-2">
+
+                    <ul class="sommaire nav nav-pills nav-stacked ">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li class="disabled"><a href="#">Disabled</a></li>
+                        <li class="dropdown">
+                            <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Dropdown <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
 
 
 
-                <c:forEach var="livre" items="${listeLivre}">
-
-                    <%-- resume du livre en mode substring --%>
-                    <c:set var="resume" value="${livre.resumeLivre}"/>
-                    <c:set var="cutResume" value="${fn:substring(resume, 0, 100)}" />
 
 
-                    <tr>
+                <div class="col-md-10">
 
-                    <div class="row">
 
-                        <td class="col-md-2"> <img src="http://lorempixel.com/400/200/"></td>
-                        <td class="col-md-8 contenu">
 
-                            <p class="title text-center">${livre.titreLivre} <small> - ${livre.sousTitreLivre}</small></p>
-                            <p>ecrit par: ${livre.auteurLivre.nomAuteur} ${livre.auteurLivre.prenomAuteur} <br>
-                                Résumé: ${cutResume}...
-                            </p>
+                    <table class="table table-striped">
 
-                        </td>
-                        <td class="col-md-2">
 
-                            <div style="height: 50px">
-                                <button class="btn-lg btn btn-danger">HT ${livre.prixHTLivre}</button>
+
+                        <c:forEach var="livre" items="${listeLivre}">
+
+                            <%-- resume du livre en mode substring --%>
+                            <c:set var="resume" value="${livre.resumeLivre}"/>
+                            <c:set var="cutResume" value="${fn:substring(resume, 0, 70)}" />
+
+
+                            <tr>
+
+                            <div class="row">
+
+                                <td class="col-md-2"> <img src="http://lorempixel.com/400/200/"></td>
+                                <td class="col-md-6 contenu">
+
+                                    <p class="title text-center">${livre.titreLivre} <small> - ${livre.sousTitreLivre}</small></p>
+                                    <p>ecrit par: ${livre.auteurLivre.nomAuteur} ${livre.auteurLivre.prenomAuteur} <br>
+                                        Résumé: ${cutResume}...
+                                    </p>
+
+                                </td>
+                                <td class="col-md-2">
+
+                                    <div style="height: 50px">
+                                        <button class="btn-lg btn btn-default btn-block">${livre.prixHTLivre}€ HT </button>
+                                    </div>
+
+                                    <div style="height: 50px">
+                                        <a href="controller?detailLivre=${livre.idLivre}"><button class="btn btn-primary">voir détail</button></a>
+
+                                        <button class="btn btn-success">+</button>
+                                    </div>
+
+
+                                </td>
+
                             </div>
 
-                            <div style="height: 50px">
-                                <a href="controller?detailLivre=${livre.idLivre}"><button class="btn btn-primary">voir détail</button></a>
-
-                                <button class="btn btn-success">+</button>
-                            </div>
+                            </tr>
 
 
-                        </td>
-
-                    </div>
-
-                    </tr>
-
-
-                </c:forEach>
+                        </c:forEach>
 
 
 
 
-            </table>
+                    </table>
+
+                </div>
+            </div>
 
 
             <h2 class="page-header text-center">Pagination, la VRAIE !!</h2>
@@ -145,4 +149,8 @@
         </div>
 
     </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="css/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
 </html>

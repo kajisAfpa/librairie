@@ -60,15 +60,7 @@ public class controller extends HttpServlet {
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
-        
-//      liste bidon pour simuler boucle for pour les onglet de page
-        List<String> bidon = new ArrayList();
-        for(int i = 1; i <= nbrPage + 1; i++) {
-            bidon.add(""+i);
-        }
-        
-        request.setAttribute("onglet", bidon);
-        
+                
 
 //                si url page existe:
         if(request.getParameter("page") != null) {
