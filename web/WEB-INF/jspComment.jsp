@@ -13,16 +13,14 @@
 
     </head>
     <body>
-        
         <%@include file="jspHeader.jsp" %>
         
-        <h1>Panier</h1>
+        <h1 class="page-header">commentaire test</h1>
         
-    <c:forEach var="livre" items="${listePanier}">
-        
-        <h2>${livre.titreLivre}</h2><br>
-        
-    </c:forEach>
-        
+         <c:if test="${param.commenter != null}">
+                    <div class="alert alert-info">${retour_comment}</div>
+                </c:if>
+
     </body>
-   <%@include file="jspFooter.jsp" %>
+
+    <%@include file="jspFooter.jsp" %>

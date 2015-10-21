@@ -12,17 +12,21 @@
 
 
     </head>
+
     <body>
         
         <%@include file="jspHeader.jsp" %>
         
-        <h1>Panier</h1>
+        <h1 class="page-header text-center">Success ! </h1>
         
-    <c:forEach var="livre" items="${listePanier}">
+        <div class="container">
+            
         
-        <h2>${livre.titreLivre}</h2><br>
+        <div class="alert alert-success text-center">Bravo ${auth.nomMembre} ${auth.prenomMembre}, tu t'es connecté avec succès mon ga !</div>
         
-    </c:forEach>
+        
+        
+        </div>
         
     </body>
-   <%@include file="jspFooter.jsp" %>
+</html>

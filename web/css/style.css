@@ -1,3 +1,10 @@
+//general application ------------------------------------------------------
+
+
+
+
+//catalogue page ------------------------------------------------------
+
 tr {
     box-sizing: content-box;
     transition: 0.1s linear;
@@ -7,7 +14,7 @@ tr {
 
 td {
     //border: 1px solid black;
-    height: 100px;
+    
     max-height: 100px;
 }
 
@@ -26,10 +33,69 @@ tr:hover {
 
 }
 
-.contenu p {
-    height: 30px;
-}
 
 .sommaire {
-    position: fixed;
+    //position: fixed;
 }
+
+.resume {
+    border-left: #ddd 3px solid;
+    padding: 5px;
+    margin-left: 20px;
+}
+
+p{
+    margin-bottom: 0;
+}
+
+
+.price {
+    border-bottom: #ededed 1px solid;
+    padding: 10px 10px 10px 0;
+}
+
+.glyphicon {
+    font-size: 110%;
+}
+
+.shop button {
+    margin: 10px 10px 10px 0;
+}
+
+//formulaire connection ------------------------------------------------------
+
+.checkbox {
+    margin-left: 19px;
+}
+
+.formConnection div {
+    padding: 10px 0;
+}
+
+//Index page ------------------------------------------------------
+
+.menu-bar {
+    border-bottom: #ddd 1 px solid;
+}
+
+.menu-item {
+    padding: 10px 100px !important;
+}
+
+.formSearch {
+    width: 50%;
+    margin: 20px auto;
+}
+
+.formSearch button{
+    margin-top: 10px;
+    
+}
+
+
+//detail page ------------------------------------------------------
+      .commentair {
+    border-bottom: 1px solid #ebebeb;
+    
+}
+

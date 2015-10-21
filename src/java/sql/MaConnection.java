@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sql;
 
 import java.sql.Connection;
@@ -11,10 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author cdi418
- */
+
 public class MaConnection {
     
    private static MaConnection mc = null;
@@ -33,7 +25,7 @@ public class MaConnection {
             String url = "jdbc:sqlserver://localhost:1433;"
                     + "databaseName=Librairie";
             String user = "sa";
-            String mdp = "sa";
+            String mdp = "ngavin";
             cnt = DriverManager.getConnection(url, user, mdp);
             
             

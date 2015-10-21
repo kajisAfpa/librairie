@@ -1,7 +1,9 @@
 
 package classes;
 
-public class MotsClefs {
+import java.io.Serializable;
+
+public class MotsClefs implements Serializable{
     
     private int idMotsClefs;
     private String nomMotsClefs;
@@ -20,6 +22,11 @@ public class MotsClefs {
 
     public void setNomMotsClefs(String nomMotsClefs) {
         this.nomMotsClefs = nomMotsClefs;
+    }
+
+    @Override
+    public String toString() {
+        return "MotsClefs{" + "idMotsClefs=" + idMotsClefs + ", nomMotsClefs=" + nomMotsClefs + '}';
     }
     
     

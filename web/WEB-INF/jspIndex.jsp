@@ -13,16 +13,8 @@
 
     </head>
     <body>
-        
         <%@include file="jspHeader.jsp" %>
-        
-        <h1>Panier</h1>
-        
-    <c:forEach var="livre" items="${listePanier}">
-        
-        <h2>${livre.titreLivre}</h2><br>
-        
-    </c:forEach>
-        
+
     </body>
-   <%@include file="jspFooter.jsp" %>
+
+    <%@include file="jspFooter.jsp" %>
