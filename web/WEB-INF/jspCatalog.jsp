@@ -16,12 +16,12 @@
 
     <body>
 
-<%@include file="jspHeader.jsp" %>
+        <%@include file="jspHeader.jsp" %>
 
         <div class="container">
 
 
-            
+
 
 
             <h1 class="page-header text-center">mon catalogue</h1>
@@ -30,19 +30,19 @@
 
             <c:if test="${(param.search != null) || (param.categorie != null)}">
                 <c:if test="${nbr_article_trouve != 0}">
-                <div class="alert alert-success text-center">nombre d'article trouvé: ${nbr_article_trouve}</div>
-                 </c:if>
-                <c:if test="${nbr_article_trouve == 0}">
-                <div class="alert alert-danger text-center">nombre d'article trouvé: ${nbr_article_trouve}</div>
-                 </c:if>
-            </c:if>
-                
-                <c:if test="${param.commenter != null}">
-                    <div class="alert alert-info">${retour_comment}</div>
+                    <div class="alert alert-success text-center">nombre d'article trouvé: ${nbr_article_trouve}</div>
                 </c:if>
-                
-                
-                <form class="formSearch" method="controller">
+                <c:if test="${nbr_article_trouve == 0}">
+                    <div class="alert alert-danger text-center">nombre d'article trouvé: ${nbr_article_trouve}</div>
+                </c:if>
+            </c:if>
+
+            <c:if test="${param.commenter != null}">
+                <div class="alert alert-info">${retour_comment}</div>
+            </c:if>
+
+
+            <form class="formSearch" method="controller">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-search"></span>
@@ -54,10 +54,10 @@
 
                 <button type="submit" name="doIt" class="btn btn-default">Submit</button>
             </form>
-            
 
 
-            
+
+
 
 
             <div class="row">
@@ -98,6 +98,10 @@
                 <%-- article catalogue --%>
 
                 <div class="col-md-10">
+                    <td class="col-md-2">
+                        <img src="http://lorempixel.com/200/150/">
+                    </td>
+
 
 
 
